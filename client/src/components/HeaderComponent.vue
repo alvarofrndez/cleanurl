@@ -34,6 +34,11 @@
                     <v-icon name='co-cut'/>
                 </RouterLink>
             </li>
+            <li class='analytics' title='analítica'>
+                <RouterLink to='/analytics'>
+                    <v-icon name='md-analytics-outlined'/>
+                </RouterLink>
+            </li>
             <li class='urls' title='mis urls'>
                 <RouterLink to='/urls'>
                     <v-icon name='hi-solid-link'/>
@@ -95,7 +100,7 @@
                 padding: 10px;
             }
 
-            .urls, .shorter{
+            .urls, .shorter, .analitycs{
                 *{
                     // size
                     width: 39px;

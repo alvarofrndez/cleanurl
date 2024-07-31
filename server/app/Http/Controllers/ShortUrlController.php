@@ -41,6 +41,8 @@ class ShortUrlController extends Controller
     {
         $shortUrl = ShortUrl::where('short_code', $shortCode)->firstOrFail();
 
+        $shortUrl->increment('clicks');
+        
         return redirect($shortUrl->original_url);
     }
 }
