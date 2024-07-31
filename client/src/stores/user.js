@@ -172,10 +172,10 @@ export const useUserStore = defineStore('user', () => {
     return true
   }
 
-  async function getAllUrls(){
+  async function getAllUrls(page){
     const token = localStorage.getItem('token')
 
-    const response = await fetch(API_URL + 'getAllUrls', {
+    const response = await fetch(API_URL + `getAllUrls?page=${page}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,

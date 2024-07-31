@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\ShortUrl;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -50,7 +51,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $shortUrls = $user->shortUrls;
+        $shortUrls = ShortUrl::where('user_email', $user->email)->paginate(2);
 
         return response()->json($shortUrls);
     }
