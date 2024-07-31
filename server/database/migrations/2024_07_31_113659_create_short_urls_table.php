@@ -12,6 +12,7 @@ class CreateShortUrlsTable extends Migration
             $table->id();
             $table->string('original_url');
             $table->string('short_code')->unique();
+            $table->string('user_email');
             $table->timestamps();
         });
     }

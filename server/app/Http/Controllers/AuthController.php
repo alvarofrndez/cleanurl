@@ -46,8 +46,16 @@ class AuthController extends Controller
     }
 
     public function checkStatus(){
-        return response()->json([
-            'status' => 'ok'     
-        ]);
+        $user = User::where('email', 'alvaro@gmail.com')->first();
+
+        if($user){
+            return response()->json([
+                'status' => 'ok'     
+            ]);
+        }else{
+            return response()->json([
+                'status' => 'ko'     
+            ]);
+        }
     }
 }

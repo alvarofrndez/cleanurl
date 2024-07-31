@@ -5,9 +5,9 @@ import App from './App.vue'
 import router from './router'
 
 import { OhVueIcon, addIcons } from 'oh-vue-icons'
-import { FaUserAlt, HiLogout } from 'oh-vue-icons/icons'
+import { FaUserAlt, HiLogout, CoCut, HiSolidLink } from 'oh-vue-icons/icons'
 
-addIcons(FaUserAlt, HiLogout)
+addIcons(FaUserAlt, HiLogout, CoCut, HiSolidLink)
 
 const app = createApp(App)
 

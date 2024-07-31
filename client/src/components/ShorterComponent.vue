@@ -1,10 +1,9 @@
 <script setup>
     import { ref } from 'vue'
     import { useShorterStore } from '@/stores/shorter'
-    import { useGlobalStore } from '@/stores/global'
+    import CardUrlComponent from '@/components/CardUrlComponent.vue'
 
     const shorter_s = useShorterStore()
-    const global_s = useGlobalStore()
     const url = ref()
     const result = ref({})
 
@@ -13,6 +12,7 @@
 
         if(response.ok){
             result.value = response.data
+            url.value = ''
         }
     }
 </script>
@@ -20,13 +20,10 @@
 <template>
     <form class='contianer-shorter' @submit.prevent="shortURL">
         <h1>Introduzca la URL</h1>
-        <input type='text' placeholder='https://dominio.com/url-a-acortar' v-model='url' required/>
+        <input type='url' placeholder='https://dominio.com/url-a-acortar' v-model='url' required autocomplete='url'/>
         <button type='submit'>Obtener link</button>
         <div class='container-result' v-if="result.short_url">
-            <span>{{ result.short_url.created_at }}</span>
-            <span>{{ result.short_url.original_url }}</span>
-            <span>{{ result.short_url.short_code }}</span>
-            <span>{{ global_s.API_URL + result.short_url.short_code }}</span>
+            <CardUrlComponent :url='result.short_url'/>
         </div>
     </form>
 </template>
@@ -35,7 +32,6 @@
     @import '@/assets/style.scss';
 
     .contianer-shorter{
-        border: 1px solid black;
         // size
         width: 100%;
         height: 100%;
@@ -43,13 +39,31 @@
         // display
         @include flex(column, center, flex-start, 4rem);
 
+        // margin
+        padding: 2rem;
+
+        // decoration
+        background-color: $h-c-blue-opacity-light;
+        border-radius: 20px;
+        box-shadow: 0px 0px 29px 2px $h-c-blue-opacity;
+
         input{
             // size
             width: 50%;
 
             // margin
-            padding: .5rem;
+            padding: .75rem;
+
+            // decoration
+            border-radius: 15px;
+            border: none;
+            outline: none;
         }
 
+        .container-result{
+            // size
+            width: 300px;
+            height: 200px;
+        }
     }
 </style>

@@ -33,8 +33,11 @@ Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logo
 // Singin user
 Route::post('/singin', [UserController::class, 'singin']);
 
+// Get all urls of the user
+Route::middleware('auth:sanctum')->get('/getAllUrls', [UserController::class, 'getAllUrls']);
+
 // short url
-Route::post('/shorten', [ShortUrlController::class, 'shorten']);
+Route::middleware('auth:sanctum')->post('/shorten', [ShortUrlController::class, 'shorten']);
 
 // redirect to url
 Route::get('/{shortCode}', [ShortUrlController::class, 'redirect']);

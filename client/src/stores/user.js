@@ -118,8 +118,6 @@ export const useUserStore = defineStore('user', () => {
     })
 
     if(response.ok){
-      const data = await response.json()
-
       localStorage.removeItem('token')
 
       return {
@@ -159,7 +157,7 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  async function checkServer(){
+  async function checkStatus(){
     const response = await fetch(API_URL + 'checkStatus', {
       method: 'GET',
       headers: {
@@ -174,5 +172,24 @@ export const useUserStore = defineStore('user', () => {
     return true
   }
 
-  return { user, singin, login, logout, getActiveUser, checkServer}
+  async function getAllUrls(){
+    const token = localStorage.getItem('token')
+
+    const response = await fetch(API_URL + 'getAllUrls', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+
+    if(!response.ok){
+      return []
+      
+    }
+
+    return await response.json()
+  }
+
+  return { user, singin, login, logout, getActiveUser, checkStatus, getAllUrls }
 })

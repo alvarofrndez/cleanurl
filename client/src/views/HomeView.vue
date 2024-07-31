@@ -16,6 +16,9 @@
     // size
     width: 60%;
     height: 60%;
+
+    // display
+    @include flex();
   }
 
 </style>

@@ -24,18 +24,22 @@
 <template>
     <header>
         <nav>
-            <li class='user-profile'>
+            <li class='user-profile' title='perfil'>
                 <RouterLink to='/profile'>
                     <v-icon name='fa-user-alt'/>
                 </RouterLink>
             </li>
-            <li>
-                <RouterLink to='/'>acortador</RouterLink>
+            <li class='shorter' title='acortador'>
+                <RouterLink to='/'>
+                    <v-icon name='co-cut'/>
+                </RouterLink>
             </li>
-            <li>
-                <RouterLink to='/urls'>urls</RouterLink>
+            <li class='urls' title='mis urls'>
+                <RouterLink to='/urls'>
+                    <v-icon name='hi-solid-link'/>
+                </RouterLink>
             </li>
-            <v-icon name='hi-logout' class='logout' @click='logout'/>
+            <v-icon name='hi-logout' class='logout' @click='logout' title='logout'/>
         </nav>
     </header>
 </template>
@@ -45,7 +49,7 @@
 
     header{
         // size
-        width: 40px;
+        width: 39px;
         height: 40px;
 
         // position
@@ -72,7 +76,7 @@
         }
 
         nav{
-            background-color: $h-c-black-opacity;
+            background-color: $h-c-blue;
             // size
             width: 100%;
             height: 100%;
@@ -91,10 +95,18 @@
                 padding: 10px;
             }
 
+            .urls, .shorter{
+                *{
+                    // size
+                    width: 39px;
+                }
+            }
+
             *{
                 // decoration
                 cursor: pointer;
                 text-decoration: none;
+                color: $h-c-white !important;
             }
         }
     }
