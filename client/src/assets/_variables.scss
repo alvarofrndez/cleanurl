@@ -1,0 +1,28 @@
+// colors
+
+$h-c-white: #FDFDFD;
+$h-c-white-opacity: #ededed;
+$h-c-black: #121212;
+$h-c-black-medium:#1e1e1e;
+$h-c-black-light:rgba(40, 40, 40, 0.6);
+$h-c-black-opacity:rgba(44, 44, 44, 0.3);
+$h-c-black-gray:#767373;
+
+// fonts
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/assets/fonts/Montserrat/static/Montserrat-Medium.ttf') 
+}
+
+$h-f-montserrat: 'Montserrat';
+
+// fonts-size
+
+$h-f-text-title: 40px;
+$h-f-text-subtitle: 32px;
+$h-f-text-big: 20px;
+$h-f-text-medium: 18px;
+$h-f-text: 16px;
+$h-s-text-small: 14px;
+
+// size
