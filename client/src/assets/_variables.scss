@@ -13,12 +13,20 @@ $h-c-green: #0beb22;
 $h-c-red: rgb(235, 11, 11);
  
 // fonts
+
 @font-face {
-    font-family: 'Montserrat';
-    src: url('/assets/fonts/Montserrat/static/Montserrat-Medium.ttf') 
+    font-family: 'Figtree';
+    src: url('/src/assets/fonts/Figtree/static/Figtree-Regular.ttf') 
 }
 
-$h-f-montserrat: 'Montserrat';
+$h-f-figtree: 'Figtree';
+
+@font-face {
+    font-family: 'Exo';
+    src: url('/src/assets/fonts/Exo_2/static/Exo2-Regular.ttf') 
+}
+
+$h-f-exo: 'Exo';
 
 // fonts-size
 

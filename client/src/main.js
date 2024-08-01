@@ -6,9 +6,9 @@ import router from './router'
 
 // icons
 import { OhVueIcon, addIcons } from 'oh-vue-icons'
-import { FaUserAlt, HiLogout, CoCut, HiSolidLink, MdAnalyticsOutlined, HiSolidExternalLink, FaRegularCopy, MdDeleteoutline, BiDot, HiSolidMenu } from 'oh-vue-icons/icons'
+import { FaUserAlt, HiLogout, CoCut, HiSolidLink, MdAnalyticsOutlined, HiSolidExternalLink, FaRegularCopy, MdDeleteoutline, BiDot, HiSolidMenu, FaShareAlt } from 'oh-vue-icons/icons'
 
-addIcons(FaUserAlt, HiLogout, CoCut, HiSolidLink, MdAnalyticsOutlined, HiSolidExternalLink, FaRegularCopy, MdDeleteoutline, BiDot, HiSolidMenu )
+addIcons(FaUserAlt, HiLogout, CoCut, HiSolidLink, MdAnalyticsOutlined, HiSolidExternalLink, FaRegularCopy, MdDeleteoutline, BiDot, HiSolidMenu, FaShareAlt )
 
 // charts
 import ECharts from 'vue-echarts'

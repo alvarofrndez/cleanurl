@@ -61,12 +61,20 @@
             toast_s.show('error al borrar url', 'error')
         }
     }
+
+    function share(){
+        const message = `Visita este enlace: ${global_s.API_URL + url.short_code}`;
+        const encoded_message = encodeURIComponent(message);
+        const whatsapp_url = `https://api.whatsapp.com/send?text=${encoded_message}`;
+        
+        window.open(whatsapp_url, '_blank');
+    }
 </script>
 
 <template>
     <article class='container-url' :id="url.short_code">
         <span class='created-at'>{{ url.created_at }}</span>
-        <span class='clicks'>{{ url.clicks ? url.clicks : 0 }} clicks</span>
+        <span class='clicks'>{{ url.clicks ? url.clicks : 0 }} {{url.clicks == 1 ? 'click' : 'clicks'}}</span>
         <v-icon class='active' v-if='is_active' name='bi-dot'/>
         <v-icon class='inactive' v-else name='bi-dot'/>
         <div class='container-data'>
@@ -85,6 +93,7 @@
                 <v-icon name='hi-solid-external-link'/>
             </a>
             <v-icon @click='copy' name='fa-regular-copy' title='copiar'/>
+            <v-icon @click='share' name='fa-share-alt' title='compartir'/> 
             <v-icon @click='deleteUrl' name='md-deleteoutline' title='eliminar'/> 
         </div>
     </article>
@@ -133,6 +142,9 @@
         }
 
         .created-by{
+            // size
+            width: 50%;
+
             // position
             position: absolute;
             left: .5rem;
@@ -188,12 +200,8 @@
         }
 
         .container-data{
-            // position
-            margin-top: 1rem;
-
             // display
             @include flex(column, flex-start, center, .5rem);
-            // height: 70%;
         }
     }
 </style>
