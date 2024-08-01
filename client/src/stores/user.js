@@ -11,6 +11,7 @@ export const useUserStore = defineStore('user', () => {
   const user = ref()
 
   async function singin(name, email, password, confirm_password){
+    // singin a user checking if the data is correct and return the status and message of the response
     const regex_password = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/ 
 
     if(!regex_password.test(password)){
@@ -75,6 +76,7 @@ export const useUserStore = defineStore('user', () => {
   }
 
   async function login(email, password){
+    // login a user checking if the data is correct and return the status and message of the response
     const response = await fetch(API_URL + 'login', {
       method: 'POST',
       headers: {
@@ -112,10 +114,12 @@ export const useUserStore = defineStore('user', () => {
   }
 
   function setLocalToken(data){
+    // set the token of the user to manteint the session
     localStorage.setItem('token', data.access_token);
   }
 
   async function logout(){
+    // logout the user deleting the token from the localstorage
     const token = localStorage.getItem('token')
 
     const response = await fetch(API_URL + 'logout', {
@@ -142,6 +146,7 @@ export const useUserStore = defineStore('user', () => {
   }
 
   async function getActiveUser(){
+    // get the the logged user if they are a loggued user
     const token = localStorage.getItem('token')
 
     if(!token){
@@ -167,6 +172,7 @@ export const useUserStore = defineStore('user', () => {
   }
 
   async function checkStatus(){
+    // check the status of the server and the database
     const response = await fetch(API_URL + 'checkStatus', {
       method: 'GET',
       headers: {
@@ -182,6 +188,7 @@ export const useUserStore = defineStore('user', () => {
   }
 
   async function getAllUrls(page){
+    // get akk the urls of the actual user with or not pagination
     const token = localStorage.getItem('token')
 
     const final_url = page ? API_URL + `getAllUrlsPaginated?page=${page}` : API_URL + `getAllUrls`
@@ -202,6 +209,7 @@ export const useUserStore = defineStore('user', () => {
   }
 
   async function deleteUrl(url){
+    // delete a url from the database
     const token = localStorage.getItem('token')
 
     try {

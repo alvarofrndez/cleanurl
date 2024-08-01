@@ -11,6 +11,7 @@ class ShortUrlController extends Controller
 {
     public function shorten(Request $request)
     {
+        // shorten the url saving it in the database and return the url
         try {
             $request->validate([
                 'original_url' => 'required|url'
@@ -39,6 +40,7 @@ class ShortUrlController extends Controller
 
     public function redirect($shortCode)
     {
+        // redirect the user to the original url
         $shortUrl = ShortUrl::where('short_code', $shortCode)->firstOrFail();
 
         $shortUrl->increment('clicks');
@@ -48,6 +50,7 @@ class ShortUrlController extends Controller
 
     public function delete($id)
     {
+        // delete the url from the database
         $user = Auth::user();
         $shortUrl = ShortUrl::where('id', $id)->where('user_email', $user->email)->first();
 

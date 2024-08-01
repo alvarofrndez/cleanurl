@@ -17,11 +17,11 @@
 
     onMounted(() => {
         convertDate()
-        console.log(url)
         // isActive()
     })
 
     function convertDate(){
+        // convert the format of the date to dd-mm-yyyy
         const date = new Date(url.created_at)
   
         const day = String(date.getDate()).padStart(2, '0')
@@ -32,6 +32,7 @@
     }
 
     async function isActive(){
+        // check if the original url is active
         const response = await fetch(url.original_url, {
             method: 'HEAD'
         })
@@ -40,6 +41,7 @@
     }
 
     async function copy(){
+        // copy the redirect url to the clipboard
         try {
             await navigator.clipboard.writeText(global_s.API_URL + url.short_code)
             toast_s.show('link copiado', 'success')
@@ -49,6 +51,7 @@
     }
 
     async function deleteUrl(){
+        // delete the url from the database
         const response = await user_s.deleteUrl(url)
 
         if(response){

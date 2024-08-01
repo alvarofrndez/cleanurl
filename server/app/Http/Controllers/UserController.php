@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     public function singin(Request $request) {
-
+        // singin a user to the database checking the data and return the user
         try {
             // validate the data of the user
             $validator = Validator::make($request->all(), [
@@ -49,6 +49,7 @@ class UserController extends Controller
 
     public function getAllUrls()
     {
+        // get al the urls of the actual user
         $user = Auth::user();
 
         $shortUrls = ShortUrl::where('user_email', $user->email)->get();
@@ -58,6 +59,7 @@ class UserController extends Controller
 
     public function getAllUrlsPaginated()
     {
+        // get all of the urls wiht pagination of the actual user
         $user = Auth::user();
 
         $shortUrls = ShortUrl::where('user_email', $user->email)->paginate(8);

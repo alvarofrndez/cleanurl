@@ -9,6 +9,7 @@ export const useShorterStore = defineStore('shorter', () => {
     const API_URL = global_s.API_URL
 
     async function shortUrl(url){
+        // short the original url and return all the data of the url
         const token = localStorage.getItem('token')
         
         const response = await fetch(API_URL + 'shorten', {

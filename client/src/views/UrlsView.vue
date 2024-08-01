@@ -6,7 +6,6 @@
     import { useToastStore } from '@/stores/toast'
 
     const user_s = useUserStore()
-    const toast_s = useToastStore()
     const urls = ref([])
     const loaded = ref(false)
     const current_page = ref(1);
@@ -14,11 +13,11 @@
     const has_next_page = ref(false);
 
     onMounted(() => {
-        // TODO: continuar la paginacion pasando el numero de pagina por argumento a esta funcion
         fetchData(1)
     })
 
     async function fetchData(page){
+        // fetch the urls of the user with pagination
         const response = await user_s.getAllUrls(page)
 
         urls.value = response

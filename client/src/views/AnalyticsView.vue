@@ -11,6 +11,7 @@
     const urls_names = ref([])
     const loaded = ref(false)
 
+    // chart data
     let chart_options = ref({
         title: {
             text: 'Contador de Clicks'

@@ -8,6 +8,7 @@
     const result = ref({})
 
     async function shortURL(){
+        // short the original url
         const response = await shorter_s.shortUrl(url.value)
 
         if(response.ok){

@@ -33,6 +33,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
+  // check if the user is loggued and redirect to the correspondent route
   const user_s = useUserStore()
   const is_authenticated = await user_s.getActiveUser()
 

@@ -13,8 +13,8 @@
   const can_load = ref(0)
 
   onMounted(async () => {
+    // check if the server is active
     can_load.value = await user_s.checkStatus() ? 1 : -1
-
   })
 </script>
 
