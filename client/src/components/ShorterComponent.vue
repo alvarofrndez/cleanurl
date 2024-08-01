@@ -37,7 +37,7 @@
         height: 100%;
 
         // display
-        @include flex(column, center, flex-start, 4rem);
+        @include flex(column, center, space-evenly, 4rem);
 
         // margin
         padding: 2rem;
@@ -58,12 +58,31 @@
             border-radius: 15px;
             border: none;
             outline: none;
+
+            @media (max-width: 800px) {
+                // size
+                width: 70%;
+            }
+
+            @media (max-width: 400px) {
+                // size
+                width: 90%;
+            }
         }
 
         .container-result{
             // size
             width: 300px;
             height: 200px;
+
+            @media (max-height: 800px) {
+                // size
+                height: 150px;
+            }
+        }
+
+        @media (max-height: 750px) {
+            gap: 2rem;
         }
     }
 </style>

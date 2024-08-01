@@ -46,5 +46,29 @@ body{
             // decoration
             text-decoration: none;
         }
+
+        button{
+            // margin
+            padding: .5rem;
+
+            // decoration
+            background-color: $h-c-black-medium;
+            color: $h-c-white !important;
+            border: none;
+            border-radius: 15px;
+            transform: scale(1);
+            cursor: pointer;
+
+            // transition
+            transition: transform .1s ease-in;
+
+            &:hover{
+                // decoration
+                transform: scale(1.1);
+
+                // transition
+                transition: transform .1s ease-in;
+            }
+        }
     }
 }

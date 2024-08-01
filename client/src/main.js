@@ -5,22 +5,23 @@ import App from './App.vue'
 import router from './router'
 
 import { OhVueIcon, addIcons } from 'oh-vue-icons'
-import { FaUserAlt, HiLogout, CoCut, HiSolidLink, MdAnalyticsOutlined } from 'oh-vue-icons/icons'
+import { FaUserAlt, HiLogout, CoCut, HiSolidLink, MdAnalyticsOutlined, HiSolidExternalLink, FaRegularCopy, MdDeleteoutline, BiDot, HiSolidMenu } from 'oh-vue-icons/icons'
 
-addIcons(FaUserAlt, HiLogout, CoCut, HiSolidLink, MdAnalyticsOutlined)
+addIcons(FaUserAlt, HiLogout, CoCut, HiSolidLink, MdAnalyticsOutlined, HiSolidExternalLink, FaRegularCopy, MdDeleteoutline, BiDot, HiSolidMenu )
 
 import ECharts from 'vue-echarts'
 import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import { BarChart } from 'echarts/charts'
-import { TitleComponent, TooltipComponent, GridComponent } from 'echarts/components'
+import { TitleComponent, TooltipComponent, GridComponent, LegendComponent } from 'echarts/components'
 
 use([
   CanvasRenderer,
   BarChart,
   TitleComponent,
   TooltipComponent,
-  GridComponent
+  GridComponent,
+  LegendComponent 
 ])
 
 const app = createApp(App)

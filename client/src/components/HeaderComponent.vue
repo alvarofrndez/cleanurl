@@ -13,7 +13,7 @@
     if(response.ok){
         toast_s.show(response.message, 'success')
 
-        user_s.user = {}
+        user_s.user = undefined
         router.push('/login')
     }else{
         toast_s.show(response.message, 'error')
@@ -24,10 +24,8 @@
 <template>
     <header>
         <nav>
-            <li class='user-profile' title='perfil'>
-                <RouterLink to='/profile'>
-                    <v-icon name='fa-user-alt'/>
-                </RouterLink>
+            <li class='user-profile'>
+                <v-icon name='hi-solid-menu'/>
             </li>
             <li class='shorter' title='acortador'>
                 <RouterLink to='/'>
@@ -61,6 +59,7 @@
         position: fixed;
         right: 20px;
         top: 20px;
+        z-index: 10000;
 
         // display
         @include flex();
@@ -113,6 +112,16 @@
                 text-decoration: none;
                 color: $h-c-white !important;
             }
+        }
+
+        @media (max-width: 500px) {
+            // size
+            width: 200px;
+            
+            // position
+            bottom: 20px;
+            top: auto;
+            right: auto;
         }
     }
 </style>

@@ -36,8 +36,14 @@ Route::post('/singin', [UserController::class, 'singin']);
 // Get all urls of the user
 Route::middleware('auth:sanctum')->get('/getAllUrls', [UserController::class, 'getAllUrls']);
 
-// short url
+// Get all urls of the user paginated by 10
+Route::middleware('auth:sanctum')->get('/getAllUrlsPaginated', [UserController::class, 'getAllUrlsPaginated']);
+
+// Short url
 Route::middleware('auth:sanctum')->post('/shorten', [ShortUrlController::class, 'shorten']);
 
-// redirect to url
+// Redirect to url
 Route::get('/{shortCode}', [ShortUrlController::class, 'redirect']);
+
+// Delete url
+Route::middleware('auth:sanctum')->delete('/urls/{id}', [ShortUrlController::class, 'delete']);

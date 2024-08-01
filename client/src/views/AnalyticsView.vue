@@ -16,9 +16,6 @@
             text: 'Contador de Clicks'
         },
         tooltip: {},
-        legend: {
-            data: ['Clicks']
-        },
         xAxis: {
             type: 'category',
             data: []
@@ -58,8 +55,7 @@
 <template>
     <main v-if='loaded'>
         <section class='chart-container'>
-            <h1>Analisis</h1>
-            <v-chart :option="chart_options" style="width: 600px;height:400px;"></v-chart>
+            <v-chart :option="chart_options" ></v-chart>
         </section>
     </main>
     <LoaderComponent v-else/>
@@ -77,8 +73,37 @@
         @include flex(column, center, center, 3rem);
 
         .chart-container{
+            // size
+            width: 60%;
+            height: 40%;
+
             // display
-            @include flex(column, center, center, 1rem);
+            @include flex(column, center, space-evenly);
+
+            @media (max-width: 850px) {
+                // size
+                width: 80%;
+                height: 60%;
+            }
+
+            @media (max-width: 550px) {
+                // size
+                width: 90%;
+                height: 80%;
+            }
+
+            @media (max-width: 400px) {
+                // size
+                width: 100%;
+            }
+            
+            .echarts{
+                div{
+                    // size
+                    width: 100% !important;
+                    height: 100% !important;
+                }
+            }
         }
     }
 </style>

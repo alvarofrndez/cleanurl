@@ -19,6 +19,16 @@
 
     // display
     @include flex();
+
+    @media (max-width: 1000px) {
+      // size
+      width: 70%;
+    }
+
+    @media (max-height: 850px) {
+      // size
+      height: 70%;
+    }
   }
 
 </style>

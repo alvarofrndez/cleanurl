@@ -51,7 +51,16 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $shortUrls = ShortUrl::where('user_email', $user->email)->paginate(2);
+        $shortUrls = ShortUrl::where('user_email', $user->email)->get();
+
+        return response()->json($shortUrls);
+    }
+
+    public function getAllUrlsPaginated()
+    {
+        $user = Auth::user();
+
+        $shortUrls = ShortUrl::where('user_email', $user->email)->paginate(8);
 
         return response()->json($shortUrls);
     }

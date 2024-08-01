@@ -12,8 +12,6 @@
     const password = ref('')
 
     async function login() {
-        email.value = 'alvaro@gmail.com'
-        password.value = '12345678aA_'
         const response = await user_s.login(email.value, password.value)
 
         if(response.ok){
@@ -31,18 +29,26 @@
 
 <template>
     <main>
-        <h1>Login</h1>
-        <form @submit.prevent='login'>
+        <h1>Iniciar sesión</h1>
+        <form @submit.prevent='login' class='container-form'>
             <div>
                 <label for='email'>Email</label>
-                <input type='email' v-model='email' required />
+                <input type='email' v-model='email' required autocomplete='email'/>
             </div>
             <div>
-                <label for='password'>Password</label>
+                <label for='password'>Contraseña</label>
                 <input type='password' v-model='password' required />
             </div>
-            <button type='submit'>Login</button>
+            <article>
+                <button type='submit'>Iniciar sesión</button>
+                <button @click="() => goTo('/singin')">Registrarse</button>
+            </article>
         </form>
-        <button @click="() => goTo('/singin')">registrarse</button>
     </main>
 </template>
+
+<style lang='scss'>
+    @import '/src/assets/style.scss';
+
+    @include loginLayout();
+</style>

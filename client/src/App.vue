@@ -19,7 +19,7 @@
 </script>
 
 <template>
-  <HeaderComponent v-if='can_load == 1'/>
+  <HeaderComponent v-if='can_load == 1 && user_s.user'/>
   <RouterView v-if='can_load == 1'/>
   <LoaderComponent v-if='can_load == 0' />
   <span v-if='can_load == -1'>No es posible establecer conexión con el servidor</span>

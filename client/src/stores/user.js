@@ -1,24 +1,25 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { checkEmail, checkPassword } from '@/utilities/user'
 import { useGlobalStore } from '@/stores/global'
+import { useToastStore } from '@/stores/toast'
 
 export const useUserStore = defineStore('user', () => {
 
+  const toast_s = useToastStore()
   const global_s = useGlobalStore()
   const API_URL = global_s.API_URL
   const user = ref()
 
-  async function singin(name, email, password){
-    if(!checkEmail){
-      // TODO: toast el email debe tener...
-      
+  async function singin(name, email, password, confirm_password){
+    const regex_password = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/ 
+
+    if(!regex_password.test(password)){
+      toast_s.show('La contraseña debe tener 8 caracteres con letra y número', 'warning')
       return
     }
 
-    if(!checkPassword){
-      // TODO: toast la contraseña debe tener...
-      
+    if(password != confirm_password){
+      toast_s.show('Las contraseñas no coinciden', 'warning')
       return
     }
 
@@ -31,38 +32,41 @@ export const useUserStore = defineStore('user', () => {
         name: name,
         email: email,
         password: password,
-        password_confirmation: password
+        password_confirmation: confirm_password
       })
     })
 
     if(!response.ok){
-      return {
-        ok: false,
-        message: 'Ha ocurrido un error'
+      if(response.status == 400){
+        return {
+          ok: false,
+          message: 'error de credenciales'
+        }
+      }else{
+        return {
+          ok: false,
+          message: 'Ha ocurrido un error'
+        }
       }
     }
 
     switch (response.status){
       case 201:
         let data = await response.json()
-        console.log(data)
         user.value = data.user
 
         setLocalToken(data)
-        // TODO: toast usuario insertado correctamente
 
         return {
           ok: true,
           message: 'bienvenido ' + user.value.email
         } 
       case 400:
-        // TODO: mostrar error de validacion
         return {
           ok: false,
           message: 'error de credenciales'
         }
       case 500:
-        // TODO: toast error interno del servidor
         return {
           ok: false,
           message: 'error del servidor'
@@ -88,17 +92,22 @@ export const useUserStore = defineStore('user', () => {
         message: 'Ha ocurrido un error'
       }
     }
+    const data = await response.json()
 
-    if(response){
-      const data = await response.json()
+    if(data.status){
       user.value = data.user
 
       setLocalToken(data)
-    }
 
-    return {
-      ok: true,
-      message: 'bienvenido ' + user.value.name
+      return {
+        ok: true,
+        message: 'bienvenido ' + user.value.name
+      }
+    }else{
+      return {
+        ok: false,
+        message: 'error de credenciales'
+      }
     }
   }
 
@@ -175,7 +184,9 @@ export const useUserStore = defineStore('user', () => {
   async function getAllUrls(page){
     const token = localStorage.getItem('token')
 
-    const response = await fetch(API_URL + `getAllUrls?page=${page}`, {
+    const final_url = page ? API_URL + `getAllUrlsPaginated?page=${page}` : API_URL + `getAllUrls`
+
+    const response = await fetch(final_url, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -185,11 +196,31 @@ export const useUserStore = defineStore('user', () => {
 
     if(!response.ok){
       return []
-      
     }
 
     return await response.json()
   }
 
-  return { user, singin, login, logout, getActiveUser, checkStatus, getAllUrls }
+  async function deleteUrl(url){
+    const token = localStorage.getItem('token')
+
+    try {
+      const response = await fetch(API_URL + `urls/${url.id}`, {
+        method: 'DELETE',
+        headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+        }
+      })
+
+      if (!response.ok)
+        return false
+        
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+
+  return { user, singin, login, logout, getActiveUser, checkStatus, getAllUrls, deleteUrl }
 })

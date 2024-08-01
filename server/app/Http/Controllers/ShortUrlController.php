@@ -45,4 +45,18 @@ class ShortUrlController extends Controller
         
         return redirect($shortUrl->original_url);
     }
+
+    public function delete($id)
+    {
+        $user = Auth::user();
+        $shortUrl = ShortUrl::where('id', $id)->where('user_email', $user->email)->first();
+
+        if (!$shortUrl) {
+            return response()->json(['error' => 'URL no encontrada o no autorizada'], 404);
+        }
+
+        $shortUrl->delete();
+
+        return response()->json(['message' => 'URL eliminada con éxito']);
+    }
 }
