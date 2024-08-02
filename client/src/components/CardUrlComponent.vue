@@ -80,11 +80,11 @@
         <div class='container-data'>
             <div>
                 <h4>url acortada:</h4> 
-                <a :href='global_s.API_URL + url.short_code'>{{ global_s.API_URL + url.short_code }}</a>
+                <a :href='global_s.API_URL + url.short_code' :title='global_s.API_URL + url.short_code'>{{ global_s.API_URL + url.short_code }}</a>
             </div>
             <div>
                 <h4>url original:</h4> 
-                <a :href='url.original_url'>{{ url.original_url }}</a>
+                <a :href='url.original_url' :title='url.original_url'>{{ url.original_url }}</a>
             </div>
         </div>
         <span class='created-by'>creada por: {{ url.user_email }}</span>
@@ -120,6 +120,7 @@
         // decoration
         border-radius: 15px;
         overflow: hidden;
+        transform: translateX(-.5rem);
 
         .created-at{
             // position

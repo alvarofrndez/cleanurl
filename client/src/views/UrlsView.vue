@@ -108,6 +108,16 @@
                     top: 6rem;
                 }
             }
+
+            @media (max-width: 500px) {
+                // margin
+                padding: 0;
+            }
+        }
+
+        @media (max-width: 500px) {
+            // size
+            width: 90%;
         }
     }
 </style>
