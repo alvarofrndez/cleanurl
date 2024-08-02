@@ -203,6 +203,9 @@
         .container-data{
             // display
             @include flex(column, flex-start, center, .5rem);
+
+            // decoration
+            overflow: hidden;
         }
     }
 </style>

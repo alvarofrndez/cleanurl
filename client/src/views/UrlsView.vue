@@ -1,11 +1,12 @@
 <script setup>
     import { ref, onMounted } from 'vue'
+    import { useRouter } from 'vue-router'
     import CardUrlComponent from '@/components/CardUrlComponent.vue'
     import LoaderComponent from '@/components/LoaderComponent.vue'
     import { useUserStore } from '@/stores/user'
-    import { useToastStore } from '@/stores/toast'
 
     const user_s = useUserStore()
+    const router = useRouter()
     const urls = ref([])
     const loaded = ref(false)
     const current_page = ref(1);
@@ -32,16 +33,24 @@
         fetchData(page)
       }
     }
+
+    function goTo(){
+        router.push('/')
+    }
 </script>
 
 <template>
     <main v-if='loaded'>
         <section class='urls-container'> 
             <h1>Mis urls</h1>
-            <div class='urls'>
+            <div class='urls' v-if='urls.data.length > 0'>
                 <CardUrlComponent v-for='url of urls.data' :url='url' :key='url.id'/>
             </div>
-            <div class='container-buttons'>
+            <div v-else class='not-urls' >
+                <h3>No tienes urls todavia</h3>
+                <button @click='goTo()'>Crear url</button>
+            </div>
+            <div class='container-buttons' v-if='urls.data.length > 0'>
                 <button @click="changePage(current_page - 1)" :disabled="current_page <= 1">Anterior</button>
                 <button @click="changePage(current_page + 1)" :disabled="!has_next_page">Siguiente</button>
             </div>
@@ -89,6 +98,15 @@
                     // decoration
                     background-color: $h-c-blue-opacity-light;
                 }
+            }
+
+            .not-urls{
+                // size
+                width: 100%;
+                height: 100%;
+
+                // display
+                @include flex(column, center, center, 2rem);
             }
 
             .container-buttons{

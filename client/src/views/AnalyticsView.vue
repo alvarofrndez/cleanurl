@@ -2,10 +2,10 @@
     import { ref, onMounted } from 'vue'
     import LoaderComponent from '@/components/LoaderComponent.vue'
     import { useUserStore } from '@/stores/user'
-    import { useToastStore } from '@/stores/toast'
+    import { useRouter } from 'vue-router'
 
     const user_s = useUserStore()
-    const toast_s = useToastStore()
+    const router = useRouter()
     const urls = ref([])
     const clicks = ref([])
     const urls_names = ref([])
@@ -51,12 +51,20 @@
             chart_options.value.series[0].data = clicks.value
         }
     }
+
+    function goTo(){
+        router.push('/')
+    }
 </script>
 
 <template>
     <main v-if='loaded'>
-        <section class='chart-container'>
+        <section class='chart-container' v-if='urls.length > 0'>
             <v-chart :option="chart_options" ></v-chart>
+        </section>
+        <section v-else class='not-urls' >
+            <h3>No tienes urls todavia</h3>
+            <button @click='goTo()'>Crear url</button>
         </section>
     </main>
     <LoaderComponent v-else/>
@@ -105,6 +113,15 @@
                     height: 100% !important;
                 }
             }
+        }
+
+        .not-urls{
+            // size
+            width: 100%;
+            height: 100%;
+
+            // display
+            @include flex(column, center, center, 2rem);
         }
     }
 </style>
